@@ -6,9 +6,11 @@ import java.util.Random;
 
 public class test {
 	public static void main(String[] args) {
-		int[] input = { 1, -3, 5, -2, 9, -8, -6, 4 };
-		bruteSum(input);
-		subSum(input);
+//		int[] input = { 1, -3, 5, -2, 9, -8, -6, 4 };
+//		bruteSum(input);
+//		subSum(input);
+		Solution s = new Solution();	
+		System.out.println(s.longestPalindrome("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
 	}
 
 	static void bruteSum(int[] input) {
@@ -183,4 +185,41 @@ public class test {
 		return b;
 	}
 
+}
+class Solution {
+    
+    static String longestPalindrome(String s) {
+		String longest = s.charAt(0) + ""; // base case : a single char is
+											// palindromic
+		for (int i = 0; i < s.length() - 1; i++) {
+		    
+			String s1 = expandAroundCenter(s, i, i);
+			
+			String s2 = expandAroundCenter(s, i, i + 1);
+			if (s1.length() > longest.length())
+				longest = s1;
+			else if (s2.length() > longest.length())
+				longest = s2;
+		}
+		return longest;
+	}
+
+    static String expandAroundCenter(String s, int i, int j) {
+		String output ="";
+		if (i==j){
+			output = s.charAt(i)+"";
+			i--;
+			j++;
+		}
+		
+		while (i>=0 &&(j<=s.length()-1)){
+			if (s.charAt(i)==s.charAt(j)){
+				output = s.charAt(i)+ output+ s.charAt(j);
+				i--;j++;
+			}else {
+				break;
+			}
+		}
+		return output;
+	}
 }

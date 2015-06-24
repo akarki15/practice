@@ -1,5 +1,7 @@
 package questions;
 
+import java.util.ArrayList;
+
 import com.sun.java.swing.plaf.windows.WindowsTreeUI.ExpandedIcon;
 
 public class LongestPalindrome {
@@ -9,11 +11,11 @@ public class LongestPalindrome {
 	 */
 
 	public static void main(String[] args) {
-		System.out.println(longestPalindrome("yteetywfdsfsserew")) ;
+		System.out.println(longestPalindrome1("yteetywfdsfsserew")) ;				
 	}
 
-	/* expand around center approach O (n^2)  GOOD */
-	static String longestPalindrome(String s) {
+	/* expand around center approach O (n^2)  GOOD but doesn't work for Leetcode*/
+	static String longestPalindrome1(String s) {
 		String longest = s.charAt(0) + ""; // base case : a single char is
 											// palindromic
 		for (int i = 0; i < s.length() - 1; i++) {
@@ -66,6 +68,7 @@ public class LongestPalindrome {
 	}
 
 	static boolean isPalindrome(String s) {
+
 		boolean b = true;
 		int n = s.length();
 		for (int i = 0; i <= (n / 2); i++) {
@@ -75,4 +78,9 @@ public class LongestPalindrome {
 		return b;
 	}
 
+	// Better solution: MANACHER'S ALGORITHM 
+	// O (n)
+	static String longestPalindrome2(String s, int i, int j){
+		return "";
+	}
 }
