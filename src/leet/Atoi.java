@@ -1,39 +1,37 @@
 package leet;
 
+// Not accepted but just matter of finding out the cases. e.g. +-2 should not be
+// processed and becomes 0. BS i say
 public class Atoi {
 	public static void main(String[] args) {
-		System.out.println(myAtoi("-2342.26"));
-			
+		System.out.println(myAtoi("+-2"));
+
 	}
 
 	public static int myAtoi(String str) {
 		int num = 0;
 		boolean sign = true;
 		boolean start = false;
-
-		for (int i = 0; i < str.length(); i++) {
+		int startIndex = 0;
+		int i = 0;
+		for (; i < str.length(); i++) {
 			if (!start) {
 				if (str.charAt(i) == '-')
 					sign = false;
-				else if (str.charAt(i) >= '0' && str.charAt(i) <= '9')
+				else if (str.charAt(i) >= '0' && str.charAt(i) <= '9') {
 					start = true;
+					startIndex = i;
+				}
 			}
 			if (start) {
 				if (str.charAt(i) == '.') {
 					break;
 				}
-				num += Math.pow(10, i) * (str.charAt(i) - '0');
+				num = num * 10 + (str.charAt(i) - '0');
 			}
 		}
-		System.out.println(num);
-		int revNum = 0;
-		int count = 0;
-		while (num > 0) {
-			int temp = ((int) (num / 10)) * 10;
-			revNum += (num - temp) * Math.pow(10, count++);
-			num = num / 10;
-		}
-		revNum *= sign ? 1 : -1;
-		return revNum;
+
+		num *= sign ? 1 : -1;
+		return num;
 	}
 }
